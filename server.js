@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 import { User } from './models/User.js';
+import { SECRETS } from './config/secrets.js';
 dotenv.config();
 connectDB();
 const app = express();
@@ -22,5 +23,5 @@ app.post ("/users", async (req, res) => {
     });
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port http://localhost:${process.env.PORT }`);
+    console.log(`Server is running on port http://localhost:${SECRETS.PORT}`);
     });
