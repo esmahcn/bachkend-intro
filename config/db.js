@@ -1,11 +1,15 @@
-import mongose from "mongoose";
+import mongoose from "mongoose";
 import { SECRETS } from "./secrets.js";
+
 export const connectDB = async () => {
   try {
-    const conn = await mongose.connect(SECRETS.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    const conn = await mongoose.connect(SECRETS.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.log(`Error: ${error.message}`);
+    console.error(`❌ MongoDB connection error: ${error.message}`);
     process.exit(1);
   }
-}
+};
