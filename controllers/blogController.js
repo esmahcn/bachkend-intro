@@ -1,16 +1,14 @@
 import Blog from "../models/Blog.js";
 
-// Create a new blog
+// Create a new blog (without userId)
 export const createBlog = async (req, res) => {
   try {
-    const { title, description, userId } = req.body;
+    const { title, description } = req.body;
 
-    if (!userId) {
-      return res.status(400).json({ message: "User ID is required" });
-    }
-
-    const blog = new Blog({ title, description, user: userId });
+    // Create the blog directly
+    const blog = new Blog({ title, description });
     const savedBlog = await blog.save();
+
     res.status(201).json(savedBlog);
   } catch (err) {
     res.status(400).json({ message: err.message });
