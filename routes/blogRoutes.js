@@ -6,13 +6,14 @@ import {
   updateBlog,
   deleteBlog,
 } from "../controllers/blogController.js";
+import { protect } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.post("/", createBlog);
+router.post("/", protect, createBlog);
 router.get("/", getAllBlogs);
 router.get("/:id", getBlogById);
-router.put("/:id", updateBlog);
-router.delete("/:id", deleteBlog);
+router.put("/:id", protect, updateBlog);
+router.delete("/:id", protect, deleteBlog);
 
 export default router;
